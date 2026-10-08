@@ -1,0 +1,16 @@
+﻿# local machine
+.env
+.env.*
+!.env.example
+
+# build
+node_modules/
+dist/
+.output/
+.vercel/
+.tanstack/
+
+# local only
+.project_id
+attachments/
+screenshots/

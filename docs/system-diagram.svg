@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" role="img">
+  <title>Cree Sanctum Cryptographic Messaging — system diagram</title>
+  <rect width="1200" height="760" fill="#070707"/>
+  <text x="40" y="48" font-family="Georgia, serif" font-size="26" fill="#F5F0E8">Cree Sanctum Cryptographic Messaging</text>
+  <text x="40" y="76" font-family="sans-serif" font-size="14" fill="#8A847A">Daniel Scribe — github.com/dmscribe · honest threat model, not unbreakable</text>
+
+  <rect x="40" y="110" width="340" height="280" rx="16" fill="#121212" stroke="#FF2A2A" stroke-width="2"/>
+  <text x="60" y="145" font-family="Georgia, serif" font-size="20" fill="#FF2A2A">Your device</text>
+  <text x="60" y="178" font-family="sans-serif" font-size="15" fill="#F5F0E8">Ed25519 identity secret</text>
+  <text x="60" y="202" font-family="sans-serif" font-size="15" fill="#F5F0E8">P-256 Sanctum device secret</text>
+  <text x="60" y="226" font-family="sans-serif" font-size="15" fill="#F5F0E8">Local verify states (TOFU)</text>
+  <text x="60" y="250" font-family="sans-serif" font-size="15" fill="#F5F0E8">Voice recorder → AES-GCM</text>
+  <text x="60" y="286" font-family="sans-serif" font-size="14" fill="#8A847A">Fingerprint read aloud in the room</text>
+  <text x="60" y="350" font-family="sans-serif" font-size="14" fill="#F5F0E8">Refuse send if bind fails</text>
+  <text x="60" y="370" font-family="sans-serif" font-size="14" fill="#F5F0E8">or verified fingerprint changes</text>
+
+  <rect x="430" y="110" width="340" height="280" rx="16" fill="#121212" stroke="#5A2020"/>
+  <text x="450" y="145" font-family="Georgia, serif" font-size="20" fill="#F5F0E8">Untrusted server</text>
+  <text x="450" y="178" font-family="sans-serif" font-size="15" fill="#F5F0E8">ciphertext · nonce · eph_pub</text>
+  <text x="450" y="202" font-family="sans-serif" font-size="15" fill="#F5F0E8">audio_* ciphertext + 24h TTL</text>
+  <text x="450" y="226" font-family="sans-serif" font-size="15" fill="#F5F0E8">public JWK + binding signature</text>
+  <text x="450" y="250" font-family="sans-serif" font-size="15" fill="#F5F0E8">armored public identity</text>
+  <text x="450" y="286" font-family="sans-serif" font-size="14" fill="#8A847A">Never your plaintext. Never your private keys.</text>
+  <text x="450" y="322" font-family="sans-serif" font-size="14" fill="#FF2A2A">Can swap a JWK — client must refuse</text>
+  <text x="450" y="360" font-family="sans-serif" font-size="14" fill="#F5F0E8">Ghost vaults exist only for mirrors</text>
+
+  <rect x="820" y="110" width="340" height="280" rx="16" fill="#121212" stroke="#FF2A2A" stroke-width="2"/>
+  <text x="840" y="145" font-family="Georgia, serif" font-size="20" fill="#FF2A2A">Ryder · network servant</text>
+  <text x="840" y="178" font-family="sans-serif" font-size="15" fill="#F5F0E8">Not a person. North Pole node.</text>
+  <text x="840" y="202" font-family="sans-serif" font-size="15" fill="#F5F0E8">Server holds this process's keys</text>
+  <text x="840" y="226" font-family="sans-serif" font-size="15" fill="#F5F0E8">Decrypts, re-signs, mirrors back</text>
+  <text x="840" y="250" font-family="sans-serif" font-size="15" fill="#F5F0E8">Exclusive with Charlie (South)</text>
+  <text x="840" y="286" font-family="sans-serif" font-size="14" fill="#8A847A">The Tom of the network. A lesson.</text>
+  <text x="840" y="350" font-family="sans-serif" font-size="14" fill="#F5F0E8">Join Ryder → algorithm log</text>
+  <text x="840" y="370" font-family="sans-serif" font-size="14" fill="#F5F0E8">Charlie's friends: Ryder views you</text>
+
+  <path d="M380 220 H430" stroke="#FF2A2A" stroke-width="2" marker-end="url(#arrow)"/>
+  <path d="M770 220 H820" stroke="#FF2A2A" stroke-width="2" marker-end="url(#arrow)"/>
+  <text x="490" y="100" font-family="sans-serif" font-size="13" fill="#8A847A">noise on the wire</text>
+
+  <rect x="40" y="420" width="540" height="300" rx="16" fill="#1A1010" stroke="#5A2020"/>
+  <text x="60" y="455" font-family="Georgia, serif" font-size="20" fill="#FF2A2A">OpenPGP bind (layer B)</text>
+  <text x="60" y="488" font-family="sans-serif" font-size="15" fill="#F5F0E8">1. Make Ed25519 cert on device</text>
+  <text x="60" y="514" font-family="sans-serif" font-size="15" fill="#F5F0E8">2. Sign sanctum-device-v1|id|x|y|t</text>
+  <text x="60" y="540" font-family="sans-serif" font-size="15" fill="#F5F0E8">3. Upload cert + detached binding</text>
+  <text x="60" y="566" font-family="sans-serif" font-size="15" fill="#F5F0E8">4. Before encrypt: verify cert + binding</text>
+  <text x="60" y="592" font-family="sans-serif" font-size="15" fill="#F5F0E8">5. Inner pgp_sig over plaintext / audio hash</text>
+  <text x="60" y="628" font-family="sans-serif" font-size="14" fill="#FF2A2A">Live packets stay ECIES. Identity sits beside them.</text>
+  <text x="60" y="688" font-family="sans-serif" font-size="14" fill="#F5F0E8">MITM check fires in the client, never as a server badge.</text>
+
+  <rect x="620" y="420" width="540" height="300" rx="16" fill="#121212" stroke="#FF2A2A"/>
+  <text x="640" y="455" font-family="Georgia, serif" font-size="20" fill="#F5F0E8">Discover vs Stealth (layer C)</text>
+  <text x="640" y="488" font-family="sans-serif" font-size="15" fill="#F5F0E8">Discover ON: 9 cards, Views lesson, mood 48h</text>
+  <text x="640" y="514" font-family="sans-serif" font-size="15" fill="#F5F0E8">on_open trains PairStore — chat never does</text>
+  <text x="640" y="540" font-family="sans-serif" font-size="15" fill="#F5F0E8">12 network servants. Red ring. Not people.</text>
+  <text x="640" y="566" font-family="sans-serif" font-size="15" fill="#F5F0E8">Ghost bans lift after 14 hours</text>
+  <text x="640" y="602" font-family="sans-serif" font-size="15" fill="#F5F0E8">Stealth: radar dies, view pips gone</text>
+  <text x="640" y="628" font-family="sans-serif" font-size="15" fill="#F5F0E8">Friends + encrypted rooms remain</text>
+  <text x="640" y="688" font-family="sans-serif" font-size="14" fill="#8A847A">PYMK engine: libsuggest C++17 · generate → slot</text>
+
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#FF2A2A"/>
+    </marker>
+  </defs>
+</svg>

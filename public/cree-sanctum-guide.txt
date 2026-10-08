@@ -1,0 +1,83 @@
+Cree Sanctum Cryptographic Messaging
+User Guide
+
+Daniel Scribe
+Pimicikamak Cree Nation, Turtle Island
+github.com/dmscribe · x.com/danRydr
+Updated 16 September 2026
+
+"They will know what it's like to be free, what it means to be Cree!"
+
+
+This is a sealed messenger. The desk is a windowed web operating system. Ciphertext moves through the mailbox. Identity stays bound to the device. Discover is optional and Stealth turns it off. Security depends on fingerprint comparison, device safety, and careful handling of exports. The server stores ciphertext packets, timestamps, and routing metadata — never plaintext mail.
+
+If you want a slower walkthrough, copy this file into an assistant you already trust and ask it to explain one section at a time.
+
+
+1. What this program does
+
+You get encrypted text and encrypted walkie-talkie voice clips. The server stores ciphertext packets, timestamps, and routing metadata. Fingerprints are how two people confirm that a published key is the right one. Security depends on that ritual, on device safety, and on careful handling of exports.
+
+
+2. Unsigned seats and throwaways
+
+If you have not registered a handle, the desk labels you Unsigned. You can also open a throwaway seat and receive sixteen Cree and Navajo words. Those words restore the seat. Anyone with the phrase can restore it. Generated-key seats use an operator_ handle plus digits so lasting handles and throwaway handles stay separate.
+
+
+3. Usernames and findability
+
+A username is a claimed chat handle. Account-backed seats may choose any available handle. Generated-key seats keep the operator_ prefix. Exact lookup finds the matching public profile and published key unless the seat is in Stealth.
+
+
+4. Keys, bind, and fingerprints
+
+On first run the device creates two keys:
+
+- an Ed25519 identity key for binding and signatures
+- a P-256 device key for ECIES packets using HKDF-SHA-256 and AES-GCM
+
+The server stores the public JWK, armored public key, and binding signature. The binding covers the exact device JWK. Fingerprint comparison is the final human check against a swapped key.
+
+
+5. Chat
+
+Each line is sealed before it leaves the device. Download chat writes a plaintext file onto the device that asked for it. That file is outside the encrypted mailbox once saved. Voice clips expire after 24 hours. Moods expire after 48 hours. Read receipts are per conversation and can be turned off. If chat history is off, messaging is off too.
+
+
+6. Cards and last active
+
+Profile cards show coarse last-active buckets such as today, this week, this month, or idle. That keeps the desk readable without turning presence into a ticker.
+
+
+7. Location and GPS
+
+The taskbar includes a square red GPS control. When GPS is off, the location line is a stated string you type yourself. When GPS is on, the desk asks for consent and replaces that line with a device-reported region label. The desk uses raw coordinates only to choose the nearest regional servant. The server stores coarse region with consent rather than raw coordinates. A mocked device can still claim a false region.
+
+
+8. Stealth, Discover, moods
+
+Discover presents two WARM cards and seven DISCOVER cards when radar is on. Stealth turns Discover and Views off while leaving your existing threads and friends in place. Moods are short-lived status notes rather than a permanent timeline.
+
+
+9. Account lifetime and gravelogs
+
+A seat that stays inactive for 365 days leaves the live system and becomes a gravelog entry with a laid-down username and date. The gravelog is a short marker that a name once existed, when it was laid down, and nothing more than that marker.
+
+
+10. GPS and local ghosts
+
+When GPS turns on, the nearest regional ghost may send a friend request. Regional ghosts help the radar weight locality. Ryder and Charlie are poles and stay out of that nearest-region step.
+
+
+11. The desk
+
+Time and date sit on the taskbar beside Sanctum WebOS. Windows drag, resize, minimize, and restore. Contacts is the home for human seats. Network servants live in the network-facing surfaces instead of the human contacts list.
+
+
+12. Honest summary
+
+Ciphertext is the mail. Bindings and fingerprints defend against key swaps. Backups use v3 AES-GCM wrap today, and older backup files still open. GPS is consent-based, coarse, and spoofable. Servant keys live in ghost_vaults so network voices can decrypt and reply in their own domain. Long-term device key theft exposes future mail for that seat until rotation.
+
+A story is only a story if the right person hears it.
+
+Cree Sanctum · sealed messenger · device-bound identity

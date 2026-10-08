@@ -1,0 +1,286 @@
+Cree Sanctum Cryptographic Messaging — Project Map
+Author: Daniel Scribe — github.com/dmscribe
+
+Purpose:
+- One line per product file or directory describing what it does.
+- Tracks the current source tree for the desk, crypto, docs, and native headers.
+- Omits dependency/build caches and transient outputs such as node_modules, dist,
+  .output, .vercel/output, artifacts logs, and screenshots.
+
+/
+- .tanstack/ — TanStack Start generated runtime and type artifacts for routing/build.
+- attachments/ — reference images and pasted text used while designing or documenting the app.
+- cpp/ — reserved C++ workspace area for future native-side code or packaging support.
+- docs/ — product documentation, diagrams, and security analysis.
+- libpgpbind/ — C++ header-only device-binding interface used by the cryptographic core.
+- libsanctum/ — C++ header-only Sanctum protocol and cryptographic core interfaces.
+- libsuggest/ — C++ people-you-may-know suggestion engine and its tests.
+- migrations/ — SQL schema and data migrations for auth, messaging, desk, and discovery state.
+- public/ — static web assets served directly by the app.
+- sanctumd/ — native daemon entrypoint that mirrors Sanctum server-side behavior.
+- scripts/ — local build, preview, env, migration, and test helper scripts.
+- server/ — runtime server middleware used by the built TanStack/Nitro app.
+- src/ — React/TanStack Start application source, routes, UI, and server helpers.
+- .env — local developer environment values; ignored so secrets are not committed.
+- .env.example — committed template for local environment configuration.
+- .gitignore — ignore rules for secrets, caches, build output, and local-only files.
+- .node_modules.lock — npm install lock marker used by the workspace/package tooling.
+- .prettierrc — Prettier formatting rules for the repository.
+- .project_id — local workspace/project identifier metadata.
+- eslint.config.mjs — ESLint configuration for TypeScript, React, and script files.
+- LICENSE — Apache 2.0 license text for the dual-licensed project.
+- LICENSE-MIT — MIT license text for the dual-licensed project.
+- LOCAL.md — short local developer runbook for booting Cree Sanctum.
+- Makefile — native C++ helper targets such as tests, bench, and archive tasks.
+- package-lock.json — exact npm dependency lockfile.
+- package.json — project metadata, scripts, and npm dependency manifest.
+- README.md — main product overview, local setup steps, and security references.
+- startup.sh — local startup helper that boots the dev server and records pid/log files.
+- tsconfig.json — TypeScript compiler configuration.
+- vite.config.ts — Vite/TanStack Start config, React plugin wiring, and security headers.
+
+/attachments
+- attachments/bc.png — reference image asset used during product iteration.
+- attachments/image.png — reference image asset used during product iteration.
+- attachments/logo.png — reference logo asset used during product iteration.
+- attachments/pasted-text.txt — pasted text scratch file captured in the repo workspace.
+
+/docs
+- docs/CRYPTO_AUDIT.md — separate cryptographic audit notes and findings in progress.
+- docs/guide-source.txt — source text used to generate the bundled product guide PDF/TXT.
+- docs/PROJECT_MAP.md — high-level markdown overview that points readers to PROJECTMAP.TXT.
+- docs/system-diagram.png — raster export of the architecture/system diagram.
+- docs/system-diagram.svg — editable vector architecture/system diagram.
+- docs/THREAT_MODEL.md — threat model and trust-boundary documentation for the app.
+
+/libpgpbind
+- libpgpbind/include/ — public headers for the PGP binding helper library.
+- libpgpbind/include/pgpbind/ — namespace folder for pgpbind headers.
+- libpgpbind/include/pgpbind/bind.hpp — canonical device-binding API for identity/fingerprint grouping.
+
+/libsanctum
+- libsanctum/include/ — public headers for the Sanctum native library.
+- libsanctum/include/sanctum/ — namespace folder for sanctum headers.
+- libsanctum/include/sanctum/sanctum.hpp — core native Sanctum types, constants, and protocol surface.
+
+/libsuggest
+- libsuggest/include/ — public headers for the suggestion engine.
+- libsuggest/include/suggest/ — namespace folder for suggest headers.
+- libsuggest/include/suggest/suggest.hpp — native pair-scoring and suggestion engine interface.
+- libsuggest/tests/ — native tests and benchmarks for the suggestion engine.
+- libsuggest/tests/bench.cpp — benchmark harness for suggestion-engine performance experiments.
+- libsuggest/tests/fixtures.cpp — shared native fixtures and sample data for suggestion tests.
+
+/migrations
+- migrations/0001_auth.sql — Better Auth tables and auth schema bootstrap.
+- migrations/0002_sanctum.sql — core Sanctum profiles, mailbox, and encrypted messaging tables.
+- migrations/0003_ghosts.sql — ghost/radar network membership and servant-side state tables.
+- migrations/0004_desk.sql — desktop/window-management persistence tables for the WebOS shell.
+- migrations/0005_identity.sql — identity/profile extensions and related normalization updates.
+- migrations/0006_desk_media.sql — desk/media attachment storage and related schema additions.
+- migrations/0007_edges.sql — graph edge tables for contacts, relationships, or social topology.
+- migrations/0008_ghost_pings.sql — ghost ping/radar activity tracking tables.
+- migrations/0009_pending_unique.sql — uniqueness constraints for pending state records.
+- migrations/auth/ — auth-specific migration mirror kept under a nested path.
+- migrations/auth/0001_auth.sql — auth bootstrap migration copy for the auth subsystem.
+
+/public
+- public/bc.png — static image asset served to the client.
+- public/cree-sanctum-cpp.zip — downloadable archive of the native C++ source tree.
+- public/cree-sanctum-guide.pdf — bundled PDF guide for the product.
+- public/cree-sanctum-guide.txt — plain-text version of the product guide.
+- public/favicon.svg — browser favicon for the web app.
+- public/LICENSE-APACHE.txt — Apache license copy exposed from the static site.
+- public/LICENSE-MIT.txt — MIT license copy exposed from the static site.
+- public/logo.png — main raster logo asset for branding and sharing.
+- public/manifest.webmanifest — standard web manifest for installable standalone behavior.
+- public/og.jpg — social/share preview image for the app.
+- public/system-diagram.png — static raster system diagram exposed from the site.
+- public/system-diagram.svg — static vector system diagram exposed from the site.
+
+/sanctumd
+- sanctumd/main.cpp — native daemon/program entrypoint for Sanctum server behavior.
+
+/scripts
+- scripts/app-env-plugin.mjs — helper for surfacing VITE_ app env values into local tooling.
+- scripts/check-auth-invariant.mjs — validates that required auth env/settings are present.
+- scripts/check-auth-invariant.test.mjs — tests for the auth invariant checker.
+- scripts/migrate.mjs — runs SQL migrations against the configured database.
+- scripts/migration-plan.mjs — computes or prints migration execution order/plans.
+- scripts/migration-plan.test.mjs — tests for migration planning behavior.
+- scripts/preview.mjs — starts, restarts, and stops the local preview server on port 8081.
+- scripts/preview.test.mjs — tests for the preview control script.
+- scripts/sign-out-plan.mjs — defines how local sign-out clears app session/client state.
+- scripts/sign-out-plan.test.mjs — tests for the sign-out state-clearing plan.
+- scripts/with-app-env.mjs — launches commands with `.env`-derived VITE_ variables injected.
+- scripts/with-app-env.test.mjs — tests for the app env launcher/parser.
+- scripts/write-guide-pdf.mjs — generates the bundled guide PDF from the guide source text.
+
+/server
+- server/middleware/ — built-app middleware hooks.
+- server/middleware/security.ts — sets CSP and related security headers for local/prod output.
+
+/src
+- src/components/ — reusable React UI building blocks and product panels.
+- src/lib/ — shared client/server logic, auth, crypto, desk state, and data helpers.
+- src/routes/ — TanStack file routes for the landing page, auth, and desk views.
+- src/router.tsx — creates the TanStack router and wires the app error boundary.
+- src/routeTree.gen.ts — generated TanStack file-route tree.
+- src/styles.css — global Tailwind/CSS theme, tokens, and base element styling.
+
+/src/components
+- src/components/AlgorithmConsole.tsx — algorithm/network console UI for technical status and logs.
+- src/components/AppShell.tsx — top-level authenticated application shell layout.
+- src/components/ChatThread.tsx — message-thread renderer for encrypted chat conversations.
+- src/components/DiscoverPanel.tsx — discover/radar panel for contacts and suggestions.
+- src/components/Emotes.tsx — small emote/reaction rendering helpers.
+- src/components/FirstRun.tsx — first-run onboarding experience for new operators.
+- src/components/FriendsPanel.tsx — friend/contact list panel.
+- src/components/IdentityPanel.tsx — identity management panel for profile and key state.
+- src/components/Landing.tsx — signed-out landing/auth screen with email and throwaway phrase flows.
+- src/components/LegalNotice.tsx — compact legal notice block reused in the UI.
+- src/components/LegalPage.tsx — full legal/license page component.
+- src/components/LogoMark.tsx — reusable Cree Sanctum brand mark component.
+- src/components/MediaBubble.tsx — renders media attachments inside chat threads.
+- src/components/OperatorHandleInput.tsx — validated input for operator handle entry/editing.
+- src/components/Portrait.tsx — portrait/avatar presentation component.
+- src/components/RoomsHome.tsx — rooms/home surface for navigating conversation spaces.
+- src/components/SanctumProvider.tsx — React provider for Sanctum app/session state.
+- src/components/ServantCard.tsx — UI card for a servant/ghost/network node.
+- src/components/ServantSheet.tsx — expanded sheet/modal for servant details.
+- src/components/VerifyRitual.tsx — verification ritual UI for trust/fingerprint confirmation.
+- src/components/ViewsPanel.tsx — panel for discover views/history and related activity.
+- src/components/VoiceBubble.tsx — voice-message bubble renderer in chat threads.
+- src/components/VoiceRecorder.tsx — client-side voice capture and send controls.
+
+/src/components/desk
+- src/components/desk/AboutWin.tsx — About window content for the Sanctum WebOS desktop.
+- src/components/desk/CardWin.tsx — profile/card window for an operator or contact.
+- src/components/desk/ChatWin.tsx — chat conversation window hosted inside the desktop shell.
+- src/components/desk/ContactsSeat.tsx — contacts seat/home surface inside the desk UI; no friends are added automatically, so an empty list shows guidance to turn Radar on or look up an exact username.
+- src/components/desk/DeskNudge.tsx — helper prompt nudging users toward desk actions.
+- src/components/desk/DeskReset.tsx — UI for resetting persisted desktop/window state.
+- src/components/desk/Desktop.tsx — main draggable-window desktop surface.
+- src/components/desk/DiscoverWin.tsx — discover/radar window wrapper.
+- src/components/desk/IdentityWin.tsx — identity/profile management window wrapper.
+- src/components/desk/MoodsWin.tsx — moods/status window for ephemeral operator state.
+- src/components/desk/NodeLogWin.tsx — node/network log window wrapper.
+- src/components/desk/RoomsWin.tsx — rooms navigation window wrapper.
+- src/components/desk/SqPortrait.tsx — square portrait/avatar variant for desk windows.
+- src/components/desk/Taskbar.tsx — bottom taskbar and session controls for the desk shell.
+- src/components/desk/ViewsWin.tsx — discover views/history window wrapper.
+- src/components/desk/Win.tsx — shared window chrome, frame, and drag/resize behavior.
+
+/src/components/ui
+- src/components/ui/button.tsx — reusable button primitive styled for the app.
+- src/components/ui/input.tsx — reusable input primitive styled for the app.
+
+/src/lib
+- src/lib/auth/ — Better Auth integration, sign-in gates, and session verification helpers.
+- src/lib/desk/ — desk-shell state, identity labeling, mates, sounds, and UI persistence.
+- src/lib/geo/ — geolocation and reverse-location helper logic.
+- src/lib/ghosts/ — static ghost/network catalog data.
+- src/lib/multiplayer/ — realtime/multiplayer transport abstractions.
+- src/lib/og/ — site/share metadata used for social preview assets.
+- src/lib/sanctum/ — core TypeScript cryptography, protocol, session, and talker logic.
+- src/lib/server/ — server-side data access and API helpers.
+- src/lib/suggest/ — suggestion engine logic and tests.
+- src/lib/db.ts — database bootstrap for Postgres or local PGLite access.
+- src/lib/env.server.ts — server-side environment parsing and defaults.
+- src/lib/error-component.tsx — shared application error boundary component.
+- src/lib/utils.ts — generic client-side utility helpers.
+
+/src/lib/auth
+- src/lib/auth/client.ts — Better Auth client wrapper and browser-side auth helpers.
+- src/lib/auth/email-password.ts — helpers for email/password and phrase-derived credentials.
+- src/lib/auth/gate-session-marker.ts — compatibility marker helper that now reports no gate session.
+- src/lib/auth/gates.tsx — UI gate components that branch between signed-in and signed-out states.
+- src/lib/auth/isolation.server.ts — server helpers for origin/isolation and request safety checks.
+- src/lib/auth/middleware.ts — request-time auth middleware helpers.
+- src/lib/auth/pglite-dialect.ts — Kysely dialect adapter for local PGLite usage.
+- src/lib/auth/provider.tsx — React auth provider wrapper for app session state.
+- src/lib/auth/providers.ts — configured optional OAuth providers for local auth flows.
+- src/lib/auth/server.ts — Better Auth server configuration and adapter wiring.
+- src/lib/auth/sign-in-gate.test.ts — tests for sign-in gate behavior.
+- src/lib/auth/sign-in-gate.ts — central sign-in gating logic used across routes/components.
+- src/lib/auth/use-current-user.ts — hook for reading the current signed-in user/session.
+- src/lib/auth/verify.server.ts — verifies the current authenticated user on the server.
+
+/src/lib/desk
+- src/lib/desk/chime.ts — desk notification chime/audio helpers.
+- src/lib/desk/gps-ghost.ts — mapping between location/radar behavior and ghost presentation.
+- src/lib/desk/identity.test.ts — tests for operator-handle reservation and anti-impersonation rules.
+- src/lib/desk/identity.ts — operator identity parsing, normalization, and seat-label helpers.
+- src/lib/desk/mates.ts — seed profile data for a small set of demo people (discoverable by exact username and by Radar/Discover); no longer auto-added as friends on account creation.
+- src/lib/desk/store.ts — persisted desk state store for windows, layout, and UI flags.
+
+/src/lib/geo
+- src/lib/geo/reverse.ts — reverse-geocoding/location label helper logic.
+
+/src/lib/ghosts
+- src/lib/ghosts/catalog.ts — catalog of regional ghosts/servants used by discover/radar.
+
+/src/lib/multiplayer
+- src/lib/multiplayer/index.ts — public export surface for realtime transport helpers.
+- src/lib/multiplayer/p2p.ts — peer-to-peer multiplayer transport/session helpers.
+
+/src/lib/og
+- src/lib/og/site.json — site metadata used to describe the app for share/OG assets.
+
+/src/lib/sanctum
+- src/lib/sanctum/code-talkers.ts — code-talker/codec helpers for Sanctum message encoding.
+- src/lib/sanctum/crypto.test.ts — cryptography primitive tests for the Sanctum TS layer.
+- src/lib/sanctum/crypto.ts — core crypto primitives and wrappers used by the web client.
+- src/lib/sanctum/links.ts — link/parsing helpers for Sanctum identifiers and references.
+- src/lib/sanctum/pgp.test.ts — OpenPGP-related tests for key handling and signatures.
+- src/lib/sanctum/pgp.ts — PGP-style identity and signature helpers.
+- src/lib/sanctum/protocol.ts — protocol types and message-shape definitions.
+- src/lib/sanctum/seat-key.ts — seat/key derivation helpers for operator sessions.
+- src/lib/sanctum/session.ts — session bootstrap and persistence helpers for crypto state.
+- src/lib/sanctum/talker.test.ts — tests for the encrypted talker/message layer.
+- src/lib/sanctum/talker.ts — encrypted messaging and talker orchestration logic.
+- src/lib/sanctum/vault.ts — vault/key storage and recovery helpers.
+
+/src/lib/server
+- src/lib/server/edges.ts — server accessors for social/contact graph edges.
+- src/lib/server/ghosts.ts — server accessors for ghost/network membership state.
+- src/lib/server/gravelog.ts — server logging helpers for node/network events.
+- src/lib/server/ids.ts — server-side id generation and parsing helpers.
+- src/lib/server/ledger.ts — server-side persistence helpers for message/history ledger data.
+- src/lib/server/mailbox.ts — server-side encrypted mailbox read/write operations.
+- src/lib/server/mates.ts — seeds the demo-people profiles into the database on first boot; does not create friendships for new seats.
+- src/lib/server/profile-keys.test.ts — tests for profile-key generation/storage behavior.
+- src/lib/server/profile-keys.ts — server helpers for managing profile/public-key material.
+- src/lib/server/profile.ts — server-side profile read/write helpers.
+- src/lib/server/radar.ts — server-side discover/radar query helpers.
+- src/lib/server/ratelimit.server.ts — rate-limiting helpers for server actions/routes.
+- src/lib/server/session.ts — server-side session helpers layered over Better Auth.
+
+/src/lib/suggest
+- src/lib/suggest/engine.test.ts — tests for the suggestion engine.
+- src/lib/suggest/engine.ts — TypeScript suggestion engine used by discover/PYMK features.
+
+/src/routes
+- src/routes/_app/ — authenticated in-app desk pages mounted under the app shell.
+- src/routes/api/ — server endpoints exposed through the TanStack Start router.
+- src/routes/__root.tsx — document shell, head tags, providers, and app outlet.
+- src/routes/_app.tsx — authenticated app-shell route layout for desk experiences.
+- src/routes/index.tsx — public landing/home route.
+- src/routes/legal.tsx — legal/license route.
+- src/routes/login.tsx — login route for explicit sign-in entry.
+
+/src/routes/api
+- src/routes/api/auth/ — Better Auth HTTP endpoint routes.
+
+/src/routes/api/auth
+- src/routes/api/auth/$.ts — catch-all Better Auth handler route.
+
+/src/routes/_app
+- src/routes/_app/chat.$peerId.tsx — chat route for a specific peer/operator id.
+- src/routes/_app/console.tsx — algorithm/node console route.
+- src/routes/_app/discover.tsx — discover/radar route.
+- src/routes/_app/friends.tsx — friends/contacts route.
+- src/routes/_app/identity.tsx — identity/profile route.
+- src/routes/_app/map.tsx — map/location route.
+- src/routes/_app/source.tsx — source/about/download route.
+- src/routes/_app/views.tsx — discover views/history route.

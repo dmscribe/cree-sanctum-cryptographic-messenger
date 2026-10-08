@@ -1,0 +1,15 @@
+{
+  "name": "Cree Sanctum",
+  "short_name": "Sanctum",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#CFE8E4",
+  "theme_color": "#CFE8E4",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
